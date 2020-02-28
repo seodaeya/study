@@ -16,9 +16,6 @@ public class Category {
 
     private String name;
 
-    /**
-     *
-     */
     @ManyToMany
     @JoinTable(name = "category_item",
             joinColumns = @JoinColumn(name = "category_id"), // category 쪽 연결 컬럼
@@ -26,7 +23,7 @@ public class Category {
     )
     private List<Item> items = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
 

@@ -16,7 +16,7 @@ public class Delivery {
     /**
      * mappedBy 는 읽기 전용
      */
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 
     @Embedded
