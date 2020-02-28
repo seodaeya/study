@@ -9,7 +9,8 @@ import java.util.List;
 @Entity
 public class Category {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "category_id")
     private Long id;
 
@@ -24,4 +25,11 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "item_id") // item 쪽 연결 컬럼
     )
     private List<Item> items = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private List<Category> child = new ArrayList<>();
 }
