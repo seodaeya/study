@@ -37,7 +37,8 @@ public class Order {
 
     /**
      * mappedBy 는 읽기 전용
-     * <p>Order만 persist 해서 담으면, OrderItem은 별도로 담지 않아도 된다.
+     * <p>CascadeType.ALL 해주면, Order만 persist 해서 OrderItem은 별도로 담지 않아도 된다.
+     * <p>각 Object 별로 persist 해주어야 하나, cascade 설정을 해주면, order만 persist 해줘도 cascade 된다.
      */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
@@ -49,7 +50,7 @@ public class Order {
      * <p>2) 오픈세션인뷰를 사용한다.
      * <p>1), 2) 방법 외에 fetch 조인으로 다 해결이 된다.
      */
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -57,4 +58,33 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    // ★ 연관관계 편의 메서드 ★
+    /**
+     * 연관관계 편의 메서드 = 양방향 편의 메서드
+     * <p>양방향 편의 메서드의 위치는 컨트롤 하는 쪽에 있는 것이 좋다.
+     * @param member
+     */
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this); // ManyToOne
+    }
+    /**
+     * 연관관계 편의 메서드 = 양방향 편의 메서드
+     * <p>양방향 편의 메서드의 위치는 컨트롤 하는 쪽에 있는 것이 좋다.
+     * @param orderItem
+     */
+    public void setOrderItems(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setOrder(this); // OneToMany
+    }
+    /**
+     * 연관관계 편의 메서드 = 양방향 편의 메서드
+     * <p>양방향 편의 메서드의 위치는 컨트롤 하는 쪽에 있는 것이 좋다.
+     * @param delivery
+     */
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this); // OneToOne
+    }
 }
