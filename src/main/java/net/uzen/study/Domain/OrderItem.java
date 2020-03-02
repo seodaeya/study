@@ -9,8 +9,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 public class OrderItem {
 
     @Id
@@ -30,6 +29,8 @@ public class OrderItem {
     private int count; // 주문 수량
 
     //==생성 메서드==//
+    protected OrderItem() {
+    }
 
     /**
      * @param item

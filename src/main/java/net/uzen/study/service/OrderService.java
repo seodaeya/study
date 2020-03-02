@@ -29,14 +29,15 @@ public class OrderService {
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
 
-        // 주문상품 생성
+        // 주문상품 생성 - OrderItem.createOrderItem 이 외의 주문 상품 생성을 막아야 한다.
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
+//        OrderItem orderItem1 = new OrderItem(); // 생성자를 protected 로 변경하면, 이와 같은 주문상품 생성을 하지 않을 것이다.
 
         // 주문 생성
         Order order = Order.createOrder(member, delivery, orderItem);
 
         // 주문 저장
-        orderRepository.save(order);
+        orderRepository.save(order); // 주문만 저장했으나, cascade 옵션에 의해 delivery 와 orderItem 은 자동으로 persist 되면서 DB에 들어간다.
 
         return order.getId();
     }
