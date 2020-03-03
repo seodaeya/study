@@ -84,10 +84,19 @@ public class MemberService {
         }
     }
 
+    /**
+     * 전체 회원 조회
+     * @return
+     */
     private List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
+    /**
+     * 회원 조회
+     * @param memberId
+     * @return
+     */
     private Member findMember(Long memberId) {
         return memberRepository.findOne(memberId);
     }

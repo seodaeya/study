@@ -30,7 +30,7 @@ public class MemberRepository {
      */
     public void /*Long*/ save(Member member) {
         em.persist(member); // Command
-//        return member.getId();
+//        return member.getId(); // 하지만 결국엔 저장만하는 것으로 수정됨.
     }
 
     /**

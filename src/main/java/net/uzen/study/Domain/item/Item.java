@@ -43,6 +43,10 @@ public abstract class Item {
         this.stockQuantity += quantity;
     }
 
+    /**
+     * 재고 감소
+     * @param quantity
+     */
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if(restStock < 0) {

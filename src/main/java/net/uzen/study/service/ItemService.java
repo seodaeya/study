@@ -15,14 +15,27 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
 
+    /**
+     * 상품 등록
+     * @param item
+     */
     public void save(Item item) {
         itemRepository.save(item);
     }
 
+    /**
+     * 상품 조회
+     * @param itemId
+     * @return
+     */
     public Item findOne(Long itemId) {
         return itemRepository.findOne(itemId);
     }
 
+    /**
+     * 상품 목록 조회
+     * @return
+     */
     public List<Item> findAll() {
         return itemRepository.findAll();
     }

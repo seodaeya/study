@@ -10,8 +10,14 @@ import net.uzen.study.repository.ItemRepository;
 import net.uzen.study.repository.MemberRepository;
 import net.uzen.study.repository.OrderRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 엔티티가 핵심 비즈니스 로직을 가지고 객체 지향의 특성을 적극 활용하는 것을 "도메인 모델 패턴"이라 한다.
+ * <p>service 에서는 단순히 엔티티를 조회하고, 엔티티에 구현된 비즈니스 로직을 호출한 뒤, 마지막에 repository 를 호출하는 게 전부이다.
+ */
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderService {
 
@@ -19,6 +25,14 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
 
+    /**
+     * 주문
+     * @param memberId
+     * @param itemId
+     * @param count
+     * @return
+     */
+    @Transactional
     public Long order(Long memberId, Long itemId, int count) {
         // 회원 조회
         Member member = memberRepository.findOne(memberId);
@@ -41,4 +55,17 @@ public class OrderService {
 
         return order.getId();
     }
+
+    /**
+     * 주문 취소
+     * @param orderId
+     */
+    public void cancelOrder(Long orderId) {
+        // 주문 조회
+        Order findOrder = orderRepository.findOne(orderId);
+        // 주문 취소
+        findOrder.cancel();
+    }
+
+    //TODO: 검색
 }

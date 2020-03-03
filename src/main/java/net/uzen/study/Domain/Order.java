@@ -1,6 +1,8 @@
 package net.uzen.study.Domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ import static javax.persistence.FetchType.LAZY;
 @Table(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     /**
@@ -68,7 +71,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    // ★ 연관관계 편의 메서드 ★
+    //==연관관계 편의 메서드==//
 
     /**
      * 연관관계 편의 메서드 = 양방향 편의 메서드
@@ -108,6 +111,7 @@ public class Order {
     /**
      * 주문 생성
      * <p>OrderItem 은 생성 시, 재고가 빠져서 주문이 들어온다.
+     *
      * @param member
      * @param delivery
      * @param OrderItmes
@@ -131,7 +135,7 @@ public class Order {
      * 주문 취소
      */
     public void cancel() {
-        if(DeliveryStatus.COMP.equals(delivery.getStatus())) {
+        if (DeliveryStatus.COMP.equals(delivery.getStatus())) {
             throw new IllegalStateException("이미 배송완료된 상품은 취소가 불가능합니다.");
         }
         this.setStatus(OrderStatus.CANCEL);
@@ -144,11 +148,12 @@ public class Order {
 
     /**
      * 전체 주문 가격 조회
+     *
      * @return
      */
     public int getTotalPrice() {
         int totalPrice = 0;
-        for(OrderItem orderItem : orderItems) {
+        for (OrderItem orderItem : orderItems) {
             totalPrice += orderItem.getTotalPrice();
         }
         return totalPrice;

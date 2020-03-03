@@ -1,6 +1,8 @@
 package net.uzen.study.Domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.uzen.study.Domain.item.Item;
 
@@ -9,7 +11,9 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
     @Id
@@ -29,8 +33,8 @@ public class OrderItem {
     private int count; // 주문 수량
 
     //==생성 메서드==//
-    protected OrderItem() {
-    }
+//    protected OrderItem() {
+//    }
 
     /**
      * @param item
