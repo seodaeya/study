@@ -88,7 +88,7 @@ public class MemberService {
      * 전체 회원 조회
      * @return
      */
-    private List<Member> findMembers() {
+    public List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
@@ -97,7 +97,7 @@ public class MemberService {
      * @param memberId
      * @return
      */
-    private Member findMember(Long memberId) {
+    public Member findMember(Long memberId) {
         return memberRepository.findOne(memberId);
     }
 }

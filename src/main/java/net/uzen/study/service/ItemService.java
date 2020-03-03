@@ -19,7 +19,8 @@ public class ItemService {
      * 상품 등록
      * @param item
      */
-    public void save(Item item) {
+    @Transactional
+    public void saveItem(Item item) {
         itemRepository.save(item);
     }
 
