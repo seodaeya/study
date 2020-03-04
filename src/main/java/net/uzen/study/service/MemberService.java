@@ -1,7 +1,7 @@
 package net.uzen.study.service;
 
 import lombok.RequiredArgsConstructor;
-import net.uzen.study.Domain.Member;
+import net.uzen.study.domain.Member;
 import net.uzen.study.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

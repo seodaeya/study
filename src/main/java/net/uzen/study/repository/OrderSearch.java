@@ -1,9 +1,10 @@
 package net.uzen.study.repository;
 
 import lombok.Getter;
-import net.uzen.study.Domain.OrderStatus;
+import lombok.Setter;
+import net.uzen.study.domain.OrderStatus;
 
-@Getter
+@Getter @Setter
 public class OrderSearch {
 
     private String memberName; // 회원 이름

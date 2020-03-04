@@ -1,16 +1,19 @@
 package net.uzen.study.service;
 
 import lombok.RequiredArgsConstructor;
-import net.uzen.study.Domain.Delivery;
-import net.uzen.study.Domain.Member;
-import net.uzen.study.Domain.Order;
-import net.uzen.study.Domain.OrderItem;
-import net.uzen.study.Domain.item.Item;
+import net.uzen.study.domain.Delivery;
+import net.uzen.study.domain.Member;
+import net.uzen.study.domain.Order;
+import net.uzen.study.domain.OrderItem;
+import net.uzen.study.domain.item.Item;
 import net.uzen.study.repository.ItemRepository;
 import net.uzen.study.repository.MemberRepository;
 import net.uzen.study.repository.OrderRepository;
+import net.uzen.study.repository.OrderSearch;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 엔티티가 핵심 비즈니스 로직을 가지고 객체 지향의 특성을 적극 활용하는 것을 "도메인 모델 패턴"이라 한다.
@@ -58,8 +61,10 @@ public class OrderService {
 
     /**
      * 주문 취소
+     *
      * @param orderId
      */
+    @Transactional
     public void cancelOrder(Long orderId) {
         // 주문 조회
         Order findOrder = orderRepository.findOne(orderId);
@@ -67,5 +72,14 @@ public class OrderService {
         findOrder.cancel();
     }
 
-    //TODO: 검색
+    /**
+     * 주문 목록
+     * <p>TODO: QueryDSL 로 개선 필요
+     *
+     * @param orderSearch
+     * @return
+     */
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 }

@@ -1,8 +1,8 @@
-package net.uzen.study.Domain.item;
+package net.uzen.study.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.uzen.study.Domain.Category;
+import net.uzen.study.domain.Category;
 import net.uzen.study.exception.NotEnoughStockException;
 
 import javax.persistence.*;
@@ -36,7 +36,8 @@ public abstract class Item {
 
     //==비즈니스 로직==//
     /**
-     * 재고 증가
+     * 엔티티가 핵심 비즈니스 로직을 가지고 객체 지향의 특성을 적극 활용하는 것을 "도메인 모델 패턴"이라 한다.
+     * <p>재고 증가
      * @param quantity
      */
     public void addStock(int quantity) {

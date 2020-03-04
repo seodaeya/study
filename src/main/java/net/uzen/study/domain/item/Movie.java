@@ -1,4 +1,4 @@
-package net.uzen.study.Domain.item;
+package net.uzen.study.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;

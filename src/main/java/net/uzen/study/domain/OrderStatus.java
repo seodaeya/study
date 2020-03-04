@@ -1,4 +1,4 @@
-package net.uzen.study.Domain;
+package net.uzen.study.domain;
 
 public enum OrderStatus {
 

@@ -1,14 +1,14 @@
 package net.uzen.study.repository;
 
 import lombok.RequiredArgsConstructor;
-import net.uzen.study.Domain.Member;
+import net.uzen.study.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
- * <p>Tip. Ctrl + Shift + T -> Test 생성
+ * IntelliJ Tip. Ctrl + Shift + T -> Test(JUnit) 생성
  */
 @Repository
 @RequiredArgsConstructor

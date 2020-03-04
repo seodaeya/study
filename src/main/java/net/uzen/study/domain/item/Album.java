@@ -1,4 +1,4 @@
-package net.uzen.study.Domain.item;
+package net.uzen.study.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,11 +7,10 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("B")
+@DiscriminatorValue("A")
 @Getter
 @Setter
-public class Book extends Item {
-
-    private String author;
-    private String isbn;
+public class Album extends Item {
+    private String artist;
+    private String etc;
 }

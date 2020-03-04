@@ -1,8 +1,8 @@
 package net.uzen.study.repository;
 
 import lombok.RequiredArgsConstructor;
-import net.uzen.study.Domain.Member;
-import net.uzen.study.Domain.Order;
+import net.uzen.study.domain.Member;
+import net.uzen.study.domain.Order;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 

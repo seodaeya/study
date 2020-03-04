@@ -1,8 +1,8 @@
-package net.uzen.study.Domain;
+package net.uzen.study.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.uzen.study.Domain.item.Item;
+import net.uzen.study.domain.item.Item;
 
 import javax.persistence.*;
 import java.util.ArrayList;

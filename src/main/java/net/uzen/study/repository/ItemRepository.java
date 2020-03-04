@@ -1,7 +1,7 @@
 package net.uzen.study.repository;
 
 import lombok.RequiredArgsConstructor;
-import net.uzen.study.Domain.item.Item;
+import net.uzen.study.domain.item.Item;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

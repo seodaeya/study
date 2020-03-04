@@ -1,10 +1,9 @@
 package net.uzen.study.controller;
 
 import lombok.RequiredArgsConstructor;
-import net.uzen.study.Domain.Address;
-import net.uzen.study.Domain.Member;
+import net.uzen.study.domain.Address;
+import net.uzen.study.domain.Member;
 import net.uzen.study.service.MemberService;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
