@@ -74,12 +74,11 @@ public class OrderService {
 
     /**
      * 주문 목록
-     * <p>TODO: QueryDSL 로 개선 필요
      *
      * @param orderSearch
      * @return
      */
     public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAllByString(orderSearch);
+        return orderRepository.findAllByQuerDSL(orderSearch);
     }
 }

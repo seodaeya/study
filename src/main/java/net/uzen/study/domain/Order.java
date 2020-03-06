@@ -20,8 +20,7 @@ import static javax.persistence.FetchType.LAZY;
  */
 @Entity
 @Table(name = "orders")
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
@@ -48,6 +47,9 @@ public class Order {
      * mappedBy 는 읽기 전용
      * <p>CascadeType.ALL 해주면, Order만 persist 해서 OrderItem은 별도로 담지 않아도 된다.
      * <p>각 Object 별로 persist 해주어야 하나, cascade 설정을 해주면, order만 persist 해줘도 cascade 된다.
+     * <p>cascade 를 할 땐, 단일 소유자일 때, 사용해야 한다.
+     * <p>만약 OrderItem 을 Order 외 다른 엔티티에서 연관관계가 있으면 사용하면 안된다.
+     * <p>Q) 그럼 OrderItem 에서 Item 과의 연관관계가 있으니 사용하면 안된다?
      */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();

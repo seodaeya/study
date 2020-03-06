@@ -1,8 +1,19 @@
+// Gradle - 5.6.4
+// JDK - 1.8
+// SpringBoot - 2.1.13.RELEASE
+// Thymeleadf - 2.1.13.RELEASE
+// Spring Data Jpa - 2.1.16.RELEASE
+// Hibernate - 5.3.15.Final
+// H2 DB - 1.4.200
+// JUnit - 4.12
+// HikariCP - 3.2.0
+
 plugins {
 	id 'org.springframework.boot' version '2.1.13.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
+
+apply plugin: 'io.spring.dependency-management'
 
 group = 'net.uzen'
 version = '0.0.1-SNAPSHOT'
@@ -18,6 +29,9 @@ repositories {
 	mavenCentral()
 }
 
+def queryDSLVersion = '4.2.2'
+def generated = "src/main/generated"
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -27,9 +41,31 @@ dependencies {
 
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1'
 
-
-	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	// QueryDSL
+	compile("com.querydsl:querydsl-core:${queryDSLVersion}")
+	compile("com.querydsl:querydsl-jpa:${queryDSLVersion}")
+	compile("com.querydsl:querydsl-apt:${queryDSLVersion}")
+	annotationProcessor(
+			"com.querydsl:querydsl-apt:${queryDSLVersion}:jpa",
+			"org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final",
+			"javax.annotation:javax.annotation-api",
+			"org.projectlombok:lombok"
+	)
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sourceSets {
+	main.java.srcDirs += [ generated ]
+}
+
+tasks.withType(JavaCompile) {
+	options.annotationProcessorGeneratedSourcesDirectory = file(generated)
+}
+
+clean.doLast {
+	file(generated).deleteDir()
 }

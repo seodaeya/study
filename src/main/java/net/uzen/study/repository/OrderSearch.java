@@ -4,10 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 import net.uzen.study.domain.OrderStatus;
 
+/**
+ * 주문 검색
+ */
 @Getter @Setter
 public class OrderSearch {
 
-    private String memberName; // 회원 이름
+    /**
+     * 회원 이름
+     */
+    private String memberName;
 
-    private OrderStatus orderStatus; // 주문 상태 { ORDER, CANCEL }
+    /**
+     * 주문 상태
+     */
+    private OrderStatus orderStatus; // { ORDER, CANCEL }
 }

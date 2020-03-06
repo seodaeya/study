@@ -1,8 +1,9 @@
 package net.uzen.study.repository;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import lombok.RequiredArgsConstructor;
-import net.uzen.study.domain.Member;
 import net.uzen.study.domain.Order;
+import net.uzen.study.domain.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -96,5 +97,36 @@ public class OrderRepository {
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
         return query.getResultList();
+    }
+
+    /**
+     * 진정한 QueryDSL 의 힘이여! 보여주거라! ㅋㅋㅋ
+     *
+     * @param orderSearch
+     * @return
+     */
+    public List<Order> findAllByQuerDSL(OrderSearch orderSearch) {
+        JPAQuery<?> query = new JPAQuery<Void>(em);
+        final QOrder qOrder = QOrder.order;
+        final QMember qMember = QMember.member;
+
+        // 1. 기본적인 쿼리
+        query.select(qOrder)
+                .from(qOrder)
+                .innerJoin(qMember);
+
+        // 2.1. 조건에 해당하는 where 문 설정
+        OrderStatus searchOrderStatus = orderSearch.getOrderStatus();
+        if (null != searchOrderStatus) {
+            query.where(qOrder.status.eq(searchOrderStatus));
+        }
+
+        // 2.2. 조건에 해당하는 where 문 설정 - 회원명
+        String searchMemberName = orderSearch.getMemberName();
+        if (null != searchMemberName) {
+            query.where(qMember.name.like(searchMemberName));
+        }
+
+        return (List<Order>) query.fetch();
     }
 }
