@@ -113,7 +113,8 @@ public class OrderRepository {
         // 1. 기본적인 쿼리
         query.select(qOrder)
                 .from(qOrder)
-                .innerJoin(qMember);
+                .innerJoin(qMember)
+                .on(qOrder.member.id.eq(qMember.id));
 
         // 2.1. 조건에 해당하는 where 문 설정
         OrderStatus searchOrderStatus = orderSearch.getOrderStatus();
