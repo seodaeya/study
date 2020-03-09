@@ -125,7 +125,8 @@ public class OrderRepository {
         // 2.2. 조건에 해당하는 where 문 설정 - 회원명
         String searchMemberName = orderSearch.getMemberName();
         if (null != searchMemberName) {
-            query.where(qMember.name.like(searchMemberName));
+//            query.where(qMember.name.like(searchMemberName));
+            query.where(qMember.name.containsIgnoreCase(searchMemberName));
         }
 
         return (List<Order>) query.fetch();
